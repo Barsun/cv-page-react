@@ -1,7 +1,7 @@
 import './Actions'
 
 var initialState = {
-  searchData: []
+  Profiles: []
 };
 
 function mainReducer(state = initialState, action){
@@ -9,7 +9,7 @@ function mainReducer(state = initialState, action){
     case 'CHANGE_SEARCH_DATA':
       return {
         ...state,
-        searchData: action.data,
+          Profiles: action.data,
       }
     default:
       return state

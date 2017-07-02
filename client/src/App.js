@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import {Form, FormGroup, FormControl, Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
-import {Grid, Row, Col} from 'react-bootstrap'
 
 
 class Search extends Component {
@@ -11,27 +7,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
 
-        this.onChange = this.onChange.bind(this)
-        this.onClear = this.onClear.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-
-    }
-    onChange(e)
-    {
-        if(e.target.value ===""){
-            this.props.fetchData({firstName: "*"})
-        }
-        else {
-            this.props.fetchData({firstName: e.target.value})
-        }
-    }
-
-    onClear(e)
-    {
-        let searchInput = ReactDOM.findDOMNode(this.refs.searchInput)
-        searchInput.value=""
-        this.props.fetchData({firstName: "*"})
-
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(e)
@@ -40,103 +16,75 @@ class Search extends Component {
         e.preventDefault();
     }
 
-    renderTitleAndForm(){
-        let titleAndForm = (
-            <Grid>
-                <Row className="show-grid">
-                    <Col smOffset={1} sm={11}> <h2> Filter Authors Database by First Name</h2></Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={4}>
-                        <Form horizontal onSubmit={this.onSubmit}>
-                            <FormGroup controlId="formInlineEmail">
-                                <Col   smOffset={3} sm={4}>
-                                    <FormControl
-                                        ref="searchInput"
-                                        type="text"
-                                        placeholder="First Name"
-                                        onChange={this.onChange}
-                                    />
-                                </Col>
-                                <Col  sm={2}>
-                                    <Button type="button" onClick={ this.onClear }>
-                                        Clear
-                                    </Button>
-                                </Col>
-                            </FormGroup>
-                        </Form>
-                    </Col>
-                </Row>
-            </Grid>
-        );
-
-        return titleAndForm;
-    }
-
     renderFullForm(){
         let fullForm = (
-            <Grid>
-                <Row className="show-grid">
-                    <Col smOffset={1} sm={11}> <h2> Filter Authors Database by First Name</h2></Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={4}>
-                        <Form horizontal onSubmit={this.onSubmit}>
-                            <FormGroup controlId="formInlineEmail">
-                                <Col   smOffset={3} sm={4}>
-                                    <FormControl
-                                        type="text"
-                                        placeholder="First Name"
-                                        onChange={this.onChange}
-                                    />
-                                </Col>
-                                <Col  sm={2}>
-                                    <Button type="button" onClick={ this.onClear }>
-                                        Clear
-                                    </Button>
-                                </Col>
-                            </FormGroup>
-                        </Form>
-                    </Col>
-                </Row>
-                <Row className="top-buffer"/>
-                <Row className="show-grid">
-                    <Col smOffset={1} sm={10}>
-                        <BootstrapTable data={ this.props.searchData } search={ false }>
-                            <TableHeaderColumn dataField='first_name'>First Name</TableHeaderColumn>
-                            <TableHeaderColumn dataField='last_name'isKey={ true } >Last Name</TableHeaderColumn>
-                        </BootstrapTable>
-                    </Col>
-                </Row>
-            </Grid>
+                <div id="content">
+                    <nav className="navbar navbar-default navbar-static-top" role="navigation">
+                        <div className="navbar-header page-scroll">
+                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                <span className="sr-only">Toggle navigation</span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div className="collapse navbar-collapse navbar-ex1-collapse">
+                            <ul className="nav navbar-nav navbar-left">
+                                <li className="page-scroll"><a href="#id-profile">// Profile</a></li>
+                                <li className="page-scroll"><a href="#id-work">// Work</a></li>
+                                <li className="page-scroll"><a href="#id-resume">// Resume</a></li>
+                                <li className="page-scroll"><a href="#id-blog">// Blog</a></li>
+                                <li className="page-scroll"><a href="#id-contact">// Contact</a></li>
+                            </ul>
+                            <ul className="nav navbar-nav navbar-right">
+                                <li className="page-scroll"><a href="#id-work">
+                                    <i className="fa fa-angle-double-down"></i>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div className="main-content">
+                        <ul className="timeline">
+                            <li id="id-profile">
+                                <div className="timeline-badge default"><i className="fa fa-user"></i></div>
+                                <h1 className="timeline-head">PROFILE</h1>
+                            </li>
+                                {this.getProfile()}
+                        </ul>
+                    </div>
+                </div>
+
+
         );
         return fullForm
     }
 
-    render() {
+    getProfile(){
+        const profilesItems = this.props.Profiles.map((profile) =>
+                <li key={profile.id} id="profile" dangerouslySetInnerHTML={{__html: profile.data}} />
+        );
 
-        if( this.props.searchData.length !== 0){
+        return profilesItems;
+    }
+
+    render() {
             return (
                 this.renderFullForm()
             );
-        }else{
-            return (
-                this.renderTitleAndForm()
-            );
-        }
+
     }
 }
 
 function mapStatetoProps(state){
     return {
-        searchData: state.searchData
+        Profiles: state.Profiles
     }
 }
 
 
 function mapDispatchToProps(dispatch){
     return {
-        fetchData: firstName => dispatch({type: 'FETCH_SEARCH_DATA', payload:firstName}),
+        fetchData: firstName => dispatch({type: 'FETCH_SEARCH_DATA'}),
     }
 }
 

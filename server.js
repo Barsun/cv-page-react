@@ -16,10 +16,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const host = "localhost"
-const user = "root"
-const pswd = ""
-const dbname = "books"
+const host = "localhost";
+const user = "root";
+const pswd = "";
+const dbname = "cv_data";
 
 // config db ====================================
 const pool = mysql.createPool({
@@ -31,27 +31,13 @@ const pool = mysql.createPool({
 });
 
 const COLUMNS = [
-  'last_name',
-  'first_name'
+  'id',
+  'data'
 ];
 
-app.get('/api/books', (req, res) => {
+app.get('/api/profile', (req, res) => {
 
-  const firstName = req.query.firstName;
-
-  if (!firstName) {
-    res.json({
-      error: 'Missing required parameters',
-    });
-    return;
-  }
-
-  let queryString = ``;
-  if(firstName=="*"){
-    queryString = `SELECT * from authors`
-  }else{
-     queryString = `SELECT * from authors WHERE first_name REGEXP '^${firstName}'`
-  }
+  let queryString = `SELECT * from profile`;
 
   pool.query(queryString,
          function(err, rows, fields) {

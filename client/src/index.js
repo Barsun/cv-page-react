@@ -11,9 +11,6 @@ import watchFetchSearchData from './Sagas.js'
 
 
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 
 //history 
 const history = createHistory()
@@ -30,14 +27,14 @@ const store = createStore(
 sagaMiddleware.run(watchFetchSearchData)
 
 //fetch initial data
-store.dispatch({type: 'FETCH_SEARCH_DATA', payload:{firstName: "*"}})
+store.dispatch({type: 'FETCH_SEARCH_DATA'})
 
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <div>
-        <Route path='/' component={App}> </Route>
+        <Route path='/' component={App} />
       </div>
     </Router>
     </Provider>,

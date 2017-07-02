@@ -4,9 +4,9 @@ import Client from './Client';
 import * as Actions from './Actions'
 
 
-function* fetchSearchData(action) {
+function* fetchSearchData() {
 
-  const searchData = yield call(Client.search, action.payload.firstName);
+  const searchData = yield call(Client.search);
   const result = yield put(Actions.changeSearchData(searchData));
   console.log("getSearchData");
 

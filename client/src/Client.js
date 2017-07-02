@@ -1,6 +1,6 @@
 
-function search(query) {
-  return fetch(`/api/books?firstName=${query}`, {
+function search() {
+  return fetch(`/api/profile`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON);
