@@ -1,6 +1,6 @@
 export function changeSearchData(data){
   return{
-    type: "CHANGE_SEARCH_DATA",
+    type: "CHANGE_DATA",
     data
   }
 }

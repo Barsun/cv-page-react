@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 
-class Search extends Component {
+class CVPage extends Component {
 
     constructor(props) {
         super(props);
@@ -50,6 +50,19 @@ class Search extends Component {
                                 <h1 className="timeline-head">PROFILE</h1>
                             </li>
                                 {this.getProfile()}
+
+                            <li id="personal-info">
+                                <div className="timeline-badge primary"></div>
+                                <div className="timeline-panel">
+                                    <h1>Personal Info</h1>
+                                    <div className="hr-left"></div>
+
+                                    {this.getPersonal()}
+
+                                </div>
+                            </li>
+
+
                         </ul>
                     </div>
                 </div>
@@ -67,6 +80,18 @@ class Search extends Component {
         return profilesItems;
     }
 
+    getPersonal(){
+        const profilesItems = this.props.Personal.map((info) =>
+            <div className="btn-group" key={info.id}>
+                <button type="button" disabled className="btn btn-primary">{info.info_type}</button>
+                <button type="button" disabled className="btn btn-default">{info.info_text}</button>
+            </div>
+
+        );
+
+        return profilesItems;
+    }
+
     render() {
             return (
                 this.renderFullForm()
@@ -75,19 +100,13 @@ class Search extends Component {
     }
 }
 
-function mapStatetoProps(state){
+function mapStateProps(state){
     return {
-        Profiles: state.Profiles
+        Profiles: state.Profiles,
+        Personal: state.Personal
     }
 }
 
+const ConnectedCVPage = connect(mapStateProps)(CVPage)
 
-function mapDispatchToProps(dispatch){
-    return {
-        fetchData: firstName => dispatch({type: 'FETCH_SEARCH_DATA'}),
-    }
-}
-
-const ConnectedSearch = connect(mapStatetoProps, mapDispatchToProps)(Search)
-
-export default ConnectedSearch
+export default ConnectedCVPage

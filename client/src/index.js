@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import mainReducer from './Reducers'
-import watchFetchSearchData from './Sagas.js'
+import watchFetchData from './Sagas.js'
 
 
 import './index.css';
@@ -24,10 +24,10 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 )
 // activate the saga(s)
-sagaMiddleware.run(watchFetchSearchData)
+sagaMiddleware.run(watchFetchData)
 
 //fetch initial data
-store.dispatch({type: 'FETCH_SEARCH_DATA'})
+store.dispatch({type: 'FETCH_DATA'})
 
 
 ReactDOM.render(

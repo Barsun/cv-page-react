@@ -1,15 +1,17 @@
 import './Actions'
 
 var initialState = {
-  Profiles: []
+  Profiles: [],
+  Personal: []
 };
 
 function mainReducer(state = initialState, action){
   switch (action.type) {
-    case 'CHANGE_SEARCH_DATA':
+    case 'CHANGE_DATA':
       return {
         ...state,
-          Profiles: action.data,
+          Profiles: action.data.profile,
+          Personal: action.data.personal,
       }
     default:
       return state

@@ -30,9 +30,15 @@ const pool = mysql.createPool({
   database: dbname
 });
 
-const COLUMNS = [
+const COLUMNSPROFILE = [
   'id',
   'data'
+];
+
+const COLUMNSPRSONAL = [
+    'id',
+    'info_type',
+    'info_text'
 ];
 
 app.get('/api/profile', (req, res) => {
@@ -47,7 +53,7 @@ app.get('/api/profile', (req, res) => {
             res.json(
               rows.map((entry) => {
                 const e = {};
-                COLUMNS.forEach((c) => {
+                  COLUMNSPROFILE.forEach((c) => {
                   e[c] = entry[c];
                 });
                 return e;
@@ -57,6 +63,32 @@ app.get('/api/profile', (req, res) => {
               res.json([]);
             }
       });
+
+});
+
+
+app.get('/api/personal', (req, res) => {
+
+    let queryString = `SELECT * from personal_info`;
+
+    pool.query(queryString,
+        function(err, rows, fields) {
+            if (err) throw err;
+
+            if (rows.length > 0){
+                res.json(
+                    rows.map((entry) => {
+                        const e = {};
+                        COLUMNSPRSONAL.forEach((c) => {
+                            e[c] = entry[c];
+                        });
+                        return e;
+                    })
+                );
+            } else {
+                res.json([]);
+            }
+        });
 
 });
 

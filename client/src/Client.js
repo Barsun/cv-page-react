@@ -1,10 +1,17 @@
 
-function search() {
+function profile() {
   return fetch(`/api/profile`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON);
-  }
+}
+
+function personal() {
+    return fetch(`/api/personal`, {
+        accept: 'application/json',
+    }).then(checkStatus)
+        .then(parseJSON);
+}
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -22,5 +29,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search };
+const Client = { profile, personal };
 export default Client;

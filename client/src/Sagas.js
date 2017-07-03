@@ -4,11 +4,15 @@ import Client from './Client';
 import * as Actions from './Actions'
 
 
-function* fetchSearchData() {
+function* fetchData() {
 
-  const searchData = yield call(Client.search);
-  const result = yield put(Actions.changeSearchData(searchData));
-  console.log("getSearchData");
+
+  const profile = yield call(Client.profile);
+  const personal = yield call(Client.personal);
+
+  let collectionObj = new DataCollection(personal, profile)
+
+  const result = yield put(Actions.changeSearchData(collectionObj));
 
   // if it is from a redux-action, we get an object with error set not a thrown error
   if (result !== undefined) {
@@ -20,7 +24,15 @@ function* fetchSearchData() {
   return result;
 }
 
-function* watchFetchSearchData(){
-  yield* takeEvery("FETCH_SEARCH_DATA", fetchSearchData);
+function* watchFetchData(){
+  yield* takeEvery("FETCH_DATA", fetchData);
 }
-export default watchFetchSearchData;
+export default watchFetchData;
+
+
+class DataCollection {
+    constructor(personal, profile) {
+        this.profile = profile;
+        this.personal = personal;
+    }
+}
