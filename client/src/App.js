@@ -61,10 +61,6 @@ class CVPage extends Component {
                                 </div>
                             </li>
 
-
-
-
-
                             <li id="id-resume">
                                 <div className="timeline-badge default"><i className="fa fa-file"></i></div>
                                 <h1 className="timeline-head">RESUME</h1>
@@ -75,8 +71,7 @@ class CVPage extends Component {
                                     <h1>Work Experience</h1>
                                     <div className="hr-left"></div>
 
-                                    {this.workExperience()}
-                                    <hr/>
+                                    {this.getWorkExperience()}
 
                                 </div>
                             </li>
@@ -85,34 +80,45 @@ class CVPage extends Component {
                                 <div className="timeline-panel">
                                     <h1>Education</h1>
                                     <div className="hr-left"></div>
-
-                                    <div className="work-experience">
-                                        <h3>Web Developer Collage</h3>
-                                        <small><i className="fa fa-calendar"></i> 2010 - 2014</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident.</p>
-                                    </div>
-                                    <hr/>
-
-                                    <div className="work-experience">
-                                        <h3>Institude IT</h3>
-                                        <small><i className="fa fa-calendar"></i> 2010 - 2012</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident.</p>
-                                    </div>
-                                    <hr/>
-
-                                    <div className="work-experience">
-                                        <h3>Web Design School</h3>
-                                        <small><i className="fa fa-calendar"></i> 2008 - 2010</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident.</p>
-                                    </div>
+                                    {this.getEducation()}
                                 </div>
                             </li>
+
+
+
+                            <li>
+                                <div className="timeline-badge warning"></div>
+                                <div className="timeline-panel">
+                                    <h1>Skills</h1>
+                                    <div className="hr-left"></div>
+                                    <div className="skillbar clearfix " data-percent="90%">
+                                        <div className="skillbar-title" ><span>HTML5</span></div>
+                                        <div className="skillbar-bar" ></div>
+                                        <div className="skill-bar-percent">90%</div>
+                                    </div>
+
+                                    <div className="skillbar clearfix " data-percent="85%">
+                                        <div className="skillbar-title" ><span>CSS3</span></div>
+                                        <div className="skillbar-bar" ></div>
+                                        <div className="skill-bar-percent">85%</div>
+                                    </div>
+
+                                    <div className="skillbar clearfix " data-percent="70%">
+                                        <div className="skillbar-title" ><span>jQuery</span></div>
+                                        <div className="skillbar-bar" ></div>
+                                        <div className="skill-bar-percent">70%</div>
+                                    </div>
+
+                                    <div className="skillbar clearfix " data-percent="50%">
+                                        <div className="skillbar-title"><span>PHP</span></div>
+                                        <div className="skillbar-bar" ></div>
+                                        <div className="skill-bar-percent">50%</div>
+                                    </div>
+
+
+                                </div>
+                            </li>
+
 
                         </ul>
                     </div>
@@ -143,14 +149,25 @@ class CVPage extends Component {
         return profilesItems;
     }
 
-    workExperience(){
+    getWorkExperience(){
         const profileItems = this.props.WorkExperience.map((profile) =>
-            <div className="work-experience">
+            <div className="work-experience" key={profile.id}>
                 <h3>{profile.position}</h3>
                 <small><i className="fa fa-calendar"></i> {profile.date_start} - {profile.date_end}</small>
                 <p>{profile.description}</p>
             </div>
+        );
 
+        return profileItems;
+    }
+
+    getEducation(){
+        const profileItems = this.props.Education.map((profile) =>
+            <div className="work-experience" key={profile.id}>
+                <h3>{profile.institution_name}</h3>
+                <small><i className="fa fa-calendar"></i> {profile.date}</small>
+                <p>{profile.description}</p>
+            </div>
         );
 
         return profileItems;
@@ -168,7 +185,8 @@ function mapStateProps(state){
     return {
         Profiles: state.Profiles,
         Personal: state.Personal,
-        WorkExperience: state.WorkExperience
+        WorkExperience: state.WorkExperience,
+        Education: state.Education
     }
 }
 

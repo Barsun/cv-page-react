@@ -3,7 +3,8 @@ import './Actions'
 var initialState = {
   Profiles: [],
   Personal: [],
-  WorkExperience: []
+  WorkExperience: [],
+  Education: []
 };
 
 function mainReducer(state = initialState, action){
@@ -13,7 +14,8 @@ function mainReducer(state = initialState, action){
         ...state,
           Profiles: action.data.profile,
           Personal: action.data.personal,
-          WorkExperience: action.data.workExperience
+          WorkExperience: action.data.workExperience,
+          Education: action.data.education
       }
     default:
       return state

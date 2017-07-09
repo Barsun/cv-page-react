@@ -50,6 +50,13 @@ const COLUMNSWK = [
     'description'
 ];
 
+const COLUMNSEDU = [
+    'id',
+    'institution_name',
+    'date',
+    'description'
+];
+
 app.get('/api/profile', (req, res) => {
 
   let queryString = `SELECT * from profile`;
@@ -114,6 +121,31 @@ app.get('/api/work-experience', (req, res) => {
                     rows.map((entry) => {
                         const e = {};
                         COLUMNSWK.forEach((c) => {
+                            e[c] = entry[c];
+                        });
+                        return e;
+                    })
+                );
+            } else {
+                res.json([]);
+            }
+        });
+
+});
+
+app.get('/api/education', (req, res) => {
+
+    let queryString = `SELECT * from education`;
+
+    pool.query(queryString,
+        function(err, rows, fields) {
+            if (err) throw err;
+
+            if (rows.length > 0){
+                res.json(
+                    rows.map((entry) => {
+                        const e = {};
+                        COLUMNSEDU.forEach((c) => {
                             e[c] = entry[c];
                         });
                         return e;
