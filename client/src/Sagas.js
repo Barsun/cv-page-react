@@ -9,8 +9,9 @@ function* fetchData() {
 
   const profile = yield call(Client.profile);
   const personal = yield call(Client.personal);
+  const workExperience = yield call(Client.workExperience);
 
-  let collectionObj = new DataCollection(personal, profile)
+  let collectionObj = new DataCollection(personal, profile, workExperience)
 
   const result = yield put(Actions.changeSearchData(collectionObj));
 
@@ -31,8 +32,9 @@ export default watchFetchData;
 
 
 class DataCollection {
-    constructor(personal, profile) {
+    constructor(personal, profile, workExperience) {
         this.profile = profile;
         this.personal = personal;
+        this.workExperience = workExperience;
     }
 }

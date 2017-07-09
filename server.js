@@ -41,6 +41,15 @@ const COLUMNSPRSONAL = [
     'info_text'
 ];
 
+const COLUMNSWK = [
+    'id',
+    'company_name',
+    'date_start',
+    'date_end',
+    'position',
+    'description'
+];
+
 app.get('/api/profile', (req, res) => {
 
   let queryString = `SELECT * from profile`;
@@ -80,6 +89,31 @@ app.get('/api/personal', (req, res) => {
                     rows.map((entry) => {
                         const e = {};
                         COLUMNSPRSONAL.forEach((c) => {
+                            e[c] = entry[c];
+                        });
+                        return e;
+                    })
+                );
+            } else {
+                res.json([]);
+            }
+        });
+
+});
+
+app.get('/api/work-experience', (req, res) => {
+
+    let queryString = `SELECT * from work_experience`;
+
+    pool.query(queryString,
+        function(err, rows, fields) {
+            if (err) throw err;
+
+            if (rows.length > 0){
+                res.json(
+                    rows.map((entry) => {
+                        const e = {};
+                        COLUMNSWK.forEach((c) => {
                             e[c] = entry[c];
                         });
                         return e;

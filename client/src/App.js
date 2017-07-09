@@ -31,13 +31,12 @@ class CVPage extends Component {
                         <div className="collapse navbar-collapse navbar-ex1-collapse">
                             <ul className="nav navbar-nav navbar-left">
                                 <li className="page-scroll"><a href="#id-profile">// Profile</a></li>
-                                <li className="page-scroll"><a href="#id-work">// Work</a></li>
                                 <li className="page-scroll"><a href="#id-resume">// Resume</a></li>
                                 <li className="page-scroll"><a href="#id-blog">// Blog</a></li>
                                 <li className="page-scroll"><a href="#id-contact">// Contact</a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li className="page-scroll"><a href="#id-work">
+                                <li className="page-scroll"><a href="#id-resume">
                                     <i className="fa fa-angle-double-down"></i>
                                 </a></li>
                             </ul>
@@ -62,6 +61,58 @@ class CVPage extends Component {
                                 </div>
                             </li>
 
+
+
+
+
+                            <li id="id-resume">
+                                <div className="timeline-badge default"><i className="fa fa-file"></i></div>
+                                <h1 className="timeline-head">RESUME</h1>
+                            </li>
+                            <li id="resume">
+                                <div className="timeline-badge warning"></div>
+                                <div className="timeline-panel">
+                                    <h1>Work Experience</h1>
+                                    <div className="hr-left"></div>
+
+                                    {this.workExperience()}
+                                    <hr/>
+
+                                </div>
+                            </li>
+                            <li id="resume">
+                                <div className="timeline-badge warning"></div>
+                                <div className="timeline-panel">
+                                    <h1>Education</h1>
+                                    <div className="hr-left"></div>
+
+                                    <div className="work-experience">
+                                        <h3>Web Developer Collage</h3>
+                                        <small><i className="fa fa-calendar"></i> 2010 - 2014</small>
+                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                            proident.</p>
+                                    </div>
+                                    <hr/>
+
+                                    <div className="work-experience">
+                                        <h3>Institude IT</h3>
+                                        <small><i className="fa fa-calendar"></i> 2010 - 2012</small>
+                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                            proident.</p>
+                                    </div>
+                                    <hr/>
+
+                                    <div className="work-experience">
+                                        <h3>Web Design School</h3>
+                                        <small><i className="fa fa-calendar"></i> 2008 - 2010</small>
+                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                            proident.</p>
+                                    </div>
+                                </div>
+                            </li>
 
                         </ul>
                     </div>
@@ -92,6 +143,19 @@ class CVPage extends Component {
         return profilesItems;
     }
 
+    workExperience(){
+        const profileItems = this.props.WorkExperience.map((profile) =>
+            <div className="work-experience">
+                <h3>{profile.position}</h3>
+                <small><i className="fa fa-calendar"></i> {profile.date_start} - {profile.date_end}</small>
+                <p>{profile.description}</p>
+            </div>
+
+        );
+
+        return profileItems;
+    }
+
     render() {
             return (
                 this.renderFullForm()
@@ -103,7 +167,8 @@ class CVPage extends Component {
 function mapStateProps(state){
     return {
         Profiles: state.Profiles,
-        Personal: state.Personal
+        Personal: state.Personal,
+        WorkExperience: state.WorkExperience
     }
 }
 
