@@ -57,6 +57,12 @@ const COLUMNSEDU = [
     'description'
 ];
 
+const COLUMNSSKILLS = [
+    'id',
+    'name',
+    'value'
+];
+
 app.get('/api/profile', (req, res) => {
 
   let queryString = `SELECT * from profile`;
@@ -146,6 +152,32 @@ app.get('/api/education', (req, res) => {
                     rows.map((entry) => {
                         const e = {};
                         COLUMNSEDU.forEach((c) => {
+                            e[c] = entry[c];
+                        });
+                        return e;
+                    })
+                );
+            } else {
+                res.json([]);
+            }
+        });
+
+});
+
+
+app.get('/api/skills', (req, res) => {
+
+    let queryString = `SELECT * from skills`;
+
+    pool.query(queryString,
+        function(err, rows, fields) {
+            if (err) throw err;
+
+            if (rows.length > 0){
+                res.json(
+                    rows.map((entry) => {
+                        const e = {};
+                        COLUMNSSKILLS.forEach((c) => {
                             e[c] = entry[c];
                         });
                         return e;

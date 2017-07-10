@@ -91,34 +91,84 @@ class CVPage extends Component {
                                 <div className="timeline-panel">
                                     <h1>Skills</h1>
                                     <div className="hr-left"></div>
-                                    <div className="skillbar clearfix " data-percent="90%">
-                                        <div className="skillbar-title" ><span>HTML5</span></div>
-                                        <div className="skillbar-bar" ></div>
-                                        <div className="skill-bar-percent">90%</div>
-                                    </div>
-
-                                    <div className="skillbar clearfix " data-percent="85%">
-                                        <div className="skillbar-title" ><span>CSS3</span></div>
-                                        <div className="skillbar-bar" ></div>
-                                        <div className="skill-bar-percent">85%</div>
-                                    </div>
-
-                                    <div className="skillbar clearfix " data-percent="70%">
-                                        <div className="skillbar-title" ><span>jQuery</span></div>
-                                        <div className="skillbar-bar" ></div>
-                                        <div className="skill-bar-percent">70%</div>
-                                    </div>
-
-                                    <div className="skillbar clearfix " data-percent="50%">
-                                        <div className="skillbar-title"><span>PHP</span></div>
-                                        <div className="skillbar-bar" ></div>
-                                        <div className="skill-bar-percent">50%</div>
-                                    </div>
-
-
+                                    {this.getSkills()}
                                 </div>
                             </li>
 
+
+                            <li id="id-contact">
+                                <div className="timeline-badge default"><i className="fa fa-envelope"></i></div>
+                                <h1 className="timeline-head">CONTACT</h1>
+                            </li>
+                            <li>
+                                <div className="timeline-badge primary"></div>
+                                <div className="timeline-panel">
+                                    <h1>Contact Me</h1>
+                                    <div className="hr-left"></div>
+                                    <p>
+                                        Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                    <form>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <input className="form-control input-lg" placeholder="Name..."/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <input className="form-control input-lg" placeholder="E-mail..."/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <input className="form-control input-lg" placeholder="Subject..."/>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <textarea className="form-control input-lg" rows="7" placeholder="Messages..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <button className="btn btn-lg btn-primary btn-block">SEND</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="timeline-badge primary"></div>
+                                <div className="timeline-panel">
+                                    <h1>Contact Info</h1>
+                                    <div className="hr-left"></div>
+                                    <div className="row" id="contact">
+                                        <div className="col-md-6">
+                                            <address>
+                                                <strong>Jonathan, Inc.</strong><br/>
+                                                795 Folsom Ave, Suite 600<br/>
+                                                San Francisco, CA 94107<br/>
+                                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                            </address>
+
+                                            <address>
+                                                <strong>JONATHAN DOE</strong><br/>
+                                                <a href="mailto:#">name@company.com</a>
+                                            </address>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <p>
+                                                Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
                         </ul>
                     </div>
@@ -173,6 +223,18 @@ class CVPage extends Component {
         return profileItems;
     }
 
+    getSkills(){
+        const profileItems = this.props.Skills.map((profile) =>
+            <div key={profile.id} className="skillbar clearfix" data-percent={profile.value+"%"}>
+                <div className="skillbar-title"><span>{profile.name}</span></div>
+                <div className="skillbar-bar" style={{"width" : profile.value+"%"}}></div>
+                <div className="skill-bar-percent">{profile.value}%</div>
+            </div>
+        );
+
+        return profileItems;
+    }
+
     render() {
             return (
                 this.renderFullForm()
@@ -186,10 +248,11 @@ function mapStateProps(state){
         Profiles: state.Profiles,
         Personal: state.Personal,
         WorkExperience: state.WorkExperience,
-        Education: state.Education
+        Education: state.Education,
+        Skills: state.Skills
     }
 }
 
-const ConnectedCVPage = connect(mapStateProps)(CVPage)
+const ConnectedCVPage = connect(mapStateProps)(CVPage);
 
 export default ConnectedCVPage
