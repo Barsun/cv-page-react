@@ -5,7 +5,8 @@ var initialState = {
   Personal: [],
   WorkExperience: [],
   Education: [],
-  Skills: []
+  Skills: [],
+  Contact: []
 };
 
 function mainReducer(state = initialState, action){
@@ -17,7 +18,8 @@ function mainReducer(state = initialState, action){
           Personal: action.data.personal,
           WorkExperience: action.data.workExperience,
           Education: action.data.education,
-          Skills: action.data.skills
+          Skills: action.data.skills,
+          Contact: action.data.contact
       }
     default:
       return state

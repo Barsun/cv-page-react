@@ -140,32 +140,7 @@ class CVPage extends Component {
                                     <h1>Contact Info</h1>
                                     <div className="hr-left"></div>
                                     <div className="row" id="contact">
-                                        <div className="col-md-6">
-                                            <address>
-                                                <strong>Jonathan, Inc.</strong><br/>
-                                                795 Folsom Ave, Suite 600<br/>
-                                                San Francisco, CA 94107<br/>
-                                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                                            </address>
-
-                                            <address>
-                                                <strong>JONATHAN DOE</strong><br/>
-                                                <a href="mailto:#">name@company.com</a>
-                                            </address>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <p>
-                                                Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                        </div>
+                                        {this.getContact()}
                                     </div>
                                 </div>
                             </li>
@@ -223,6 +198,16 @@ class CVPage extends Component {
         return profileItems;
     }
 
+    getContact(){
+        const profileItems = this.props.Contact.map((profile) =>
+            <div className="col-md-6" key={profile.id} dangerouslySetInnerHTML={{__html: profile.data}}>
+
+            </div>
+        );
+
+        return profileItems;
+    }
+
     getSkills(){
         const profileItems = this.props.Skills.map((profile) =>
             <div key={profile.id} className="skillbar clearfix" data-percent={profile.value+"%"}>
@@ -249,7 +234,8 @@ function mapStateProps(state){
         Personal: state.Personal,
         WorkExperience: state.WorkExperience,
         Education: state.Education,
-        Skills: state.Skills
+        Skills: state.Skills,
+        Contact: state.Contact
     }
 }
 

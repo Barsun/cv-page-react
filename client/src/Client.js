@@ -34,6 +34,13 @@ function skills() {
         .then(parseJSON);
 }
 
+function contact() {
+    return fetch(`/api/contact`, {
+        accept: 'application/json',
+    }).then(checkStatus)
+        .then(parseJSON);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -50,5 +57,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { profile, personal, workExperience, education, skills };
+const Client = { profile, personal, workExperience, education, skills, contact };
 export default Client;

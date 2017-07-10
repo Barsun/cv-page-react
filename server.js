@@ -190,6 +190,32 @@ app.get('/api/skills', (req, res) => {
 
 });
 
+
+app.get('/api/contact', (req, res) => {
+
+    let queryString = `SELECT * from contact`;
+
+    pool.query(queryString,
+        function(err, rows, fields) {
+            if (err) throw err;
+
+            if (rows.length > 0){
+                res.json(
+                    rows.map((entry) => {
+                        const e = {};
+                        COLUMNSPROFILE.forEach((c) => {
+                            e[c] = entry[c];
+                        });
+                        return e;
+                    })
+                );
+            } else {
+                res.json([]);
+            }
+        });
+
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
