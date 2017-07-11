@@ -4,7 +4,23 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "babel-loader": "^7.1.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.29.0",
+    "npm-install-webpack-plugin": "^4.0.4",
+    "react-scripts": "1.0.7",
+    "sw-precache-webpack-plugin": "^0.11.4",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1",
+    "react": "15.3.0",
+    "react-dom": "15.3.0",
+    "react-fa": "^4.1.2",
+    "react-fontawesome": "^1.5.0",
+    "react-lazyload": "^2.2.0",
+    "react-loader": "^2.4.0",
+    "react-router": "2.6.1",
+    "react-tooltip": "3.1.5",
+    "redux": "^3.6.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
