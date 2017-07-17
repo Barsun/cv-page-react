@@ -1,29 +1,18 @@
 sudo: false
-
 language: node_js
-
 node_js:
-
   - "6.9"
 
 
 branches:
 
   only:
-
     - master
 
 
 install:
-
   - npm install
 
 
 script:
-
-  - gulp travis-build
-
-
-after_script:
-
-  - gulp travis-release
+  - npm build

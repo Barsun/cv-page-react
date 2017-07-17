@@ -5,3 +5,5 @@ client/node_modules
 npm-debug\.log
 
 client/debug\.log
+
+client/build/
