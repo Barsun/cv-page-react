@@ -7,3 +7,9 @@ npm-debug\.log
 client/debug\.log
 
 client/build/
+
+client/config/
+
+client/scripts/
+
+keys\.txt
